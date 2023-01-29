@@ -47,16 +47,37 @@ end
 # Part 2
 
 def hello(name)
-
+  return "Hello, " + name
 end
 
 
 
 def starts_with_consonant?(string)
+  if (string.length() == 0)
+    return false
+  end
 
+  start = string[0]
+  start.upcase!
+  if (start == 'A' || start == 'E' || start == 'I' || start == 'O' || start == 'U' || (!letter?(start)))
+    return false
+  end
+
+  return true
 end
 
 def binary_multiple_of_4?(string)
+  if ! validBinary?(string) 
+    return false
+  end
+  
+  if (string[-1] == '1')
+    return false
+  elsif (string.length() >= 2)
+    return string[-2] != '1'
+  else
+    return true
+  end
   
 end
 
