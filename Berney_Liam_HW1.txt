@@ -49,6 +49,6 @@ Ruby intro part 3
 [32m      should display 1.1 as $1.10 [10 points][0m
 [32m      should display 20 as $20.00 [10 points][0m
 
-Finished in 0.03134 seconds (files took 0.14679 seconds to load)
+Finished in 0.02873 seconds (files took 0.11501 seconds to load)
 [32m34 examples, 0 failures[0m
 
