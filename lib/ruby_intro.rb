@@ -4,118 +4,93 @@
 
 def sum(arr)
   arrsum = 0
-  arr.each { |x| arrsum += x}
-  return arrsum
+  arr.each { |x| arrsum += x }
+  arrsum
 end
 
 def max_2_sum(arr)
-
-  if arr.length() == 0
+  if arr.empty?
     return 0
-  elsif arr.length() == 1
+  elsif arr.length == 1
     return arr[0]
   end
 
-  max = -10000000
-  max2 = -10000000
-  arr.each {|x| 
+  max = -10_000_000
+  max2 = -10_000_000
+  arr.each do |x|
     if x > max
       max2 = max
       max = x
     elsif x > max2
       max2 = x
     end
-  }
-  return max + max2
+  end
+  max + max2
 end
 
 def sum_to_n?(arr, number)
-    dictionary = {}
-    for i in 0...arr.length()
-      dictionary[number - arr[i]] = i
-    end
+  dictionary = {}
+  (0...arr.length).each do |i|
+    dictionary[number - arr[i]] = i
+    return true if dictionary.key?(arr[i]) && dictionary[arr[i]] != i
+  end
 
-    for i in 0...arr.length()
-      if (dictionary.key?(arr[i]) && dictionary[arr[i]] != i)
-        return true
-      end
-    end
-
-    return false
+  false
 end
 
 # Part 2
 
 def hello(name)
-  return "Hello, " + name
+  "Hello, #{name}"
 end
 
-
-
 def starts_with_consonant?(string)
-  if (string.length() == 0)
-    return false
-  end
+  return false if string.empty?
 
   start = string[0]
   start.upcase!
-  if (start == 'A' || start == 'E' || start == 'I' || start == 'O' || start == 'U' || (!letter?(start)))
-    return false
-  end
+  vowels = %w[A E I O U]
+  return false if vowels.include?(start) || !letter?(start)
 
-  return true
+  true
 end
 
 def binary_multiple_of_4?(string)
-  if ! validBinary?(string) 
-    return false
-  end
-  
-  if (string[-1] == '1')
-    return false
-  elsif (string.length() >= 2)
-    return string[-2] != '1'
+  return false unless valid_binary?(string)
+
+  if string[-1] == '1'
+    false
+  elsif string.length >= 2
+    string[-2] != '1'
   else
-    return true
+    true
   end
-  
 end
 
-def letter?(lookAhead)
-  lookAhead.match?(/[[:alpha:]]/)
+def letter?(look_ahead)
+  look_ahead.match?(/[[:alpha:]]/)
 end
 
-def validBinary?(lookAhead)
-  return lookAhead.length() >= 1 && ! lookAhead.match?(/[^10]/)
+def valid_binary?(look_ahead)
+  look_ahead.length >= 1 && !look_ahead.match?(/[^10]/)
 end
 
 # Part 3
 
 # Object representing a book
 class BookInStock
-
   def initialize(isbn, price)
+    raise ArgumentError, "Expected a positive value for price, got #{price}" if price <= 0
 
-    raise ArgumentError.new(
-      "Expected a positive value for price, got #{price}"
-    ) if price <= 0
-
-    raise ArgumentError.new(
-      "Expected a non empty string for isbn, got #{isbn}"
-    ) if isbn == ''
+    raise ArgumentError, "Expected a non empty string for isbn, got #{isbn}" if isbn == ''
 
     @isbn = isbn
     @price = price
   end
 
-  def price_as_string()
-    return "$" + sprintf('%.2f', price)
+  def price_as_string
+    "$#{format('%.2f', price)}"
   end
 
-  attr_accessor :isbn
-  attr_accessor :price
-
-  
-
+  attr_accessor :isbn, :price
 end
-
