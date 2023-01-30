@@ -81,13 +81,6 @@ def binary_multiple_of_4?(string)
   
 end
 
-# Part 3
-
-# Object representing a book
-class BookInStock
-  # YOUR CODE HERE
-end
-
 def letter?(lookAhead)
   lookAhead.match?(/[[:alpha:]]/)
 end
@@ -95,3 +88,34 @@ end
 def validBinary?(lookAhead)
   return lookAhead.length() >= 1 && ! lookAhead.match?(/[^10]/)
 end
+
+# Part 3
+
+# Object representing a book
+class BookInStock
+
+  def initialize(isbn, price)
+
+    raise ArgumentError.new(
+      "Expected a positive value for price, got #{price}"
+    ) if price <= 0
+
+    raise ArgumentError.new(
+      "Expected a non empty string for isbn, got #{isbn}"
+    ) if isbn == ''
+
+    @isbn = isbn
+    @price = price
+  end
+
+  def price_as_string()
+    return "$" + sprintf('%.2f', price)
+  end
+
+  attr_accessor :isbn
+  attr_accessor :price
+
+  
+
+end
+
